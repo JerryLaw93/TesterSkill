@@ -58,6 +58,69 @@ software-tester/
    pip install openpyxl
    ```
 
+## 自定义 MCP：captcha 验证码识别
+
+`captcha` 是本项目**自定义编写的 MCP 服务器**（源码见 `catpcha_mcp.py`），基于 `FastMCP` + `ddddocr` 实现验证码图片识别，供测试执行时自动识别登录/表单验证码。
+
+### 源码（catpcha_mcp.py）
+
+```python
+from ast import main
+from fastmcp import FastMCP
+import ddddocr
+
+mcp = FastMCP("captcha-orc")
+
+_ocr = ddddocr.DdddOcr()
+
+
+@mcp.tool()
+def recognize_captcha(image_path: str) -> str:
+    with open(image_path, 'rb') as f:
+        return _ocr.classification(f.read())
+
+
+@mcp.tool()
+def recognize_captcha_base64(image_bytes: bytes) -> str:
+    import base64
+    return _ocr.classification(base64.b64decode(image_bytes))
+
+
+if __name__ == "__main__":
+    mcp.run(transport="stdio")
+```
+
+### 依赖安装
+
+```bash
+pip install fastmcp ddddocr
+```
+
+| 依赖 | 用途 |
+|------|------|
+| `fastmcp` | MCP 服务器框架，提供 `@mcp.tool()` 装饰器与 stdio 传输 |
+| `ddddocr` | OCR 验证码识别引擎，识别图片中的验证码字符 |
+
+### 提供的工具
+
+| 工具 | 参数 | 说明 |
+|------|------|------|
+| `recognize_captcha` | `image_path` (str) | 从本地图片文件路径识别验证码 |
+| `recognize_captcha_base64` | `image_bytes` (str) | 从 base64 编码的图片字节识别验证码 |
+
+### 配置方式
+
+在 `mcp.json` 中注册，`args` 指向脚本路径：
+
+```json
+"captcha": {
+  "command": "python",
+  "args": ["D:/study/MCP/catpcha_mcp.py"]
+}
+```
+
+> **注意**：脚本路径需根据实际存放位置修改。
+
 ## 使用方式
 
 ### 1. 生成测试用例
