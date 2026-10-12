@@ -7,14 +7,31 @@ by the software-tester skill, using the `playwright` (browser automation) and `c
 ## Overview
 
 ```
-生成用例 (.xlsx) → 解析用例 → 准备环境 → 逐条执行 → 收集证据 → 回填结果 → 生成报告
+[用户明确要求执行] → 确认用例文件路径 → 解析用例 → 准备环境 → 逐条执行 → 收集证据 → 回填结果 → 生成报告
 ```
+
+> **IMPORTANT — 默认不执行**: 生成用例后**不会自动执行**。只有用户明确说「执行用例」等指令时才进入本流程。
+> 执行前必须向用户确认**用例文件路径**（`.xlsx`），不要自行猜测。
+
+---
+
+## Phase 0: Confirm Execution Request
+
+**必须满足以下条件才可开始执行：**
+
+1. 用户明确要求执行（如「执行用例」「开始执行」「run the tests」）。
+2. 用户提供（或确认）用例文件路径：
+   - 若用户未提供，**先询问**，例如：
+     > 请提供要执行的用例文件路径（.xlsx）
+   - 不要猜测或搜索文件路径后直接执行。
+3. 确认执行范围：全部用例 / 指定模块 / 指定用例编号。
+4. 确认 SUT URL 与登录凭据。
 
 ---
 
 ## Phase 1: Parse Test Cases
 
-Read the generated `.xlsx` test case table and extract the following fields per case:
+Read the user-provided `.xlsx` test case table and extract the following fields per case:
 
 | Field | Excel Column | Purpose |
 |-------|-------------|---------|
@@ -116,10 +133,24 @@ For each case, determine the result:
 | PASS | OK | All steps executed, all expected results verified |
 | FAIL | NG | Any step failed / expected result not met |
 | SKIP | SKIP | Not executable (性能/安全测试, missing prerequisites) |
+| AMBIGUOUS | AMBIGUOUS | 步骤/预期结果不明确，无法客观判断，需人工确认 |
+
+**AMBIGUOUS (模糊/不确定) 判定标准** — 遇到以下情况**不要猜测执行**，标记为 AMBIGUOUS：
+
+1. 步骤描述不明确，无法确定操作哪个元素（如「点击相关按钮」但页面有多个候选）。
+2. 预期结果表述模糊，无法客观断言（如「页面正常显示」无具体断言点）。
+3. 步骤缺失或前后矛盾（前置条件未满足、步骤顺序不合理）。
+4. 页面出现多个相似元素/弹窗，无法确定目标。
+5. 涉及需要人工判断的业务规则或外部依赖。
 
 For FAIL cases, record in 备注 (Y column):
 ```
 失败步骤：第3步「点击保存按钮」；失败原因：按钮未找到/页面无响应；证据：evidence/TC-LOG-001_03.png
+```
+
+For AMBIGUOUS cases, record in 备注 (Y column):
+```
+模糊：第2步「点击相关按钮」页面存在多个候选按钮；待确认：请明确要点击哪个按钮
 ```
 
 ---
@@ -130,10 +161,10 @@ Update the test case table:
 
 | Column | Field | Value |
 |--------|-------|-------|
-| V | 测试结果 (第1轮) | OK / NG / SKIP |
+| V | 测试结果 (第1轮) | OK / NG / SKIP / AMBIGUOUS |
 | W | 测试版本 (第1轮) | e.g., V1.0 |
 | X | 测试人 (第1轮) | executor name |
-| Y | 备注 (第1轮) | failure reason / evidence path |
+| Y | 备注 (第1轮) | failure reason / ambiguity description / evidence path |
 
 Also update the header statistics zone (rows 5~9):
 - 用例条数 = total cases
@@ -159,29 +190,38 @@ Create a summary report (`.md` or in the 统计 sheet):
 - 已执行：18
 - 通过：15
 - 失败：3
-- 跳过：2
+- 跳过：1
+- 模糊：1
 - 通过率：83.3%
 - 执行率：90%
 
 ## 按模块统计
-| 模块 | 总数 | 通过 | 失败 | 跳过 |
-|------|------|------|------|------|
-| 登录 | 5 | 4 | 1 | 0 |
-| ...   | ... | ... | ... | ... |
+| 模块 | 总数 | 通过 | 失败 | 跳过 | 模糊 |
+|------|------|------|------|------|------|
+| 登录 | 5 | 4 | 1 | 0 | 0 |
+| ...   | ... | ... | ... | ... | ... |
 
 ## 失败详情
 | 用例编号 | 失败步骤 | 原因 | 证据 |
 |----------|---------|------|------|
 | TC-LOG-003 | 第2步 | 元素未找到 | evidence/TC-LOG-003_02.png |
+
+## 模糊用例（需人工确认）
+| 用例编号 | 模糊点 | 待确认问题 |
+|----------|--------|-----------|
+| TC-LOG-007 | 第2步「点击相关按钮」页面存在多个候选按钮 | 请明确要点击哪个按钮 |
 ```
 
 ---
 
 ## Execution Rules
 
-1. **Best-effort**: If a case cannot be reliably automated, mark SKIP and note for manual testing.
-2. **Isolation**: If a case modifies data (create/delete), reset state between cases when possible.
-3. **Evidence**: Always capture screenshots; they are the primary proof of execution.
-4. **Retry**: CAPTCHA recognition failures → refresh + retry (max 3). Other transient failures → retry once.
-5. **Stop conditions**: Stop execution if login fails after 3 attempts, or if the SUT is unreachable.
-6. **Report**: Always produce a final execution report with pass/fail/skip statistics.
+1. **默认不执行**: 生成用例后不自动执行，只有用户明确要求执行时才进入本流程。
+2. **用例文件路径**: 执行前必须确认用户提供的 `.xlsx` 用例文件路径，未提供则询问，不自行猜测。
+3. **Best-effort**: If a case cannot be reliably automated, mark SKIP and note for manual testing.
+4. **不猜测执行**: 遇到模糊/不确定的步骤或预期结果，标记 AMBIGUOUS 并列出待确认问题，不猜测执行。
+5. **Isolation**: If a case modifies data (create/delete), reset state between cases when possible.
+6. **Evidence**: Always capture screenshots; they are the primary proof of execution.
+7. **Retry**: CAPTCHA recognition failures → refresh + retry (max 3). Other transient failures → retry once.
+8. **Stop conditions**: Stop execution if login fails after 3 attempts, or if the SUT is unreachable.
+9. **Report**: Always produce a final execution report with pass/fail/skip/ambiguous statistics.

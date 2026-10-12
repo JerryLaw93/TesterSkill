@@ -144,18 +144,23 @@ Both servers are user-configured and must be enabled in the IDE before the skill
 
 ## Automated Test Execution (自动执行用例)
 
-After the test case table is generated, the skill can automatically execute the cases using
-`playwright` + `captcha`. See `execution_workflow.md` for the full workflow.
+> **IMPORTANT — 默认不执行**: 生成用例后**不会自动执行**。只有用户明确说「执行用例」等指令时才执行。
+> 执行前必须确认用户提供的**用例文件路径**（`.xlsx`），未提供则先询问，不自行猜测。
+
+After the test case table is generated, the skill **can** automatically execute the cases using
+`playwright` + `captcha` **only when the user explicitly requests execution**. See `execution_workflow.md` for the full workflow.
 
 ### Execution Checklist
 
-1. Confirm the SUT URL and login credentials with the user.
-2. Ensure `playwright` and `captcha` MCP servers are enabled.
-3. Read the `.xlsx` test case table and extract executable cases.
-4. Execute each case with playwright actions; use captcha for verification codes.
-5. Save screenshots as evidence under `evidence/`.
-6. Backfill results (OK/NG/SKIP) into the `.xlsx` table (V~Y columns).
-7. Generate an execution report.
+1. **确认用户明确要求执行**（说「执行用例」等指令）。
+2. **确认用例文件路径**：用户提供 `.xlsx` 路径；未提供则询问。
+3. Confirm the SUT URL and login credentials with the user.
+4. Ensure `playwright` and `captcha` MCP servers are enabled.
+5. Read the `.xlsx` test case table and extract executable cases.
+6. Execute each case with playwright actions; use captcha for verification codes.
+7. Save screenshots as evidence under `evidence/`.
+8. Backfill results (OK/NG/SKIP/AMBIGUOUS) into the `.xlsx` table (V~Y columns).
+9. Generate an execution report.
 
 ### Result Mapping
 
@@ -164,6 +169,7 @@ After the test case table is generated, the skill can automatically execute the 
 | PASS | OK | All steps and expected results verified |
 | FAIL | NG | A step failed or an expected result was not met |
 | SKIP | SKIP | Not executable (性能/安全测试, missing prerequisites) |
+| AMBIGUOUS | AMBIGUOUS | 步骤/预期结果不明确，无法客观判断，需人工确认 |
 
 ### Best Practices
 
@@ -172,3 +178,4 @@ After the test case table is generated, the skill can automatically execute the 
 - Verify expected results with `browser_snapshot`, not screenshots.
 - Use `browser_network_requests` to verify API-level expected results.
 - Mark complex/unreliable cases as SKIP for manual testing.
+- **不猜测执行**: 遇到模糊/不确定的步骤或预期结果，标记 AMBIGUOUS 并列出待确认问题。

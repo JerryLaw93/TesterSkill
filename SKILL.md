@@ -319,42 +319,54 @@ This skill integrates with the following MCP servers to enhance testing capabili
 
 ## Step 5: Automated Test Execution (自动执行用例)
 
-After the test case table (`.xlsx`) is generated, the skill can **automatically execute the test cases** using the configured MCP servers (`playwright` for browser automation, `captcha` for verification code recognition). This turns the test case table into an executable test suite.
+> **IMPORTANT — 默认不执行**: 生成测试用例后**不会自动执行**。只有用户明确说「执行用例 / 开始执行 / run the tests」等指令时，才进入本步骤。生成阶段只交付思维导图和用例表，不调用 playwright / captcha。
+
+After the test case table (`.xlsx`) is generated, the skill **can** automatically execute the test cases **only when the user explicitly requests execution**. Use the configured MCP servers (`playwright` for browser automation, `captcha` for verification code recognition).
 
 ### 5.1 Execution Preconditions
 
+- **用户明确要求执行**（说「执行用例」等指令）。
+- **用例文件路径**：用户必须提供要执行的 `.xlsx` 用例文件路径。若未提供，先询问用户，不要自行猜测路径。
 - The system under test (SUT) URL must be known. Ask the user if not provided.
 - Login credentials must be provided by the user (or use a test account).
 - The `playwright` and `captcha` MCP servers must be enabled.
-- The generated `.xlsx` test case table must exist.
 
 ### 5.2 Execution Flow
 
-1. **Parse test cases**: Read the `.xlsx` test case table, extract each case's 用例编号 (case ID), 一级/二级/三级模块, 前置条件, 测试方法和步骤, 预期结果.
-2. **Select executable cases**: Filter cases whose 分类 is 功能测试 or 接口测试 (UI-executable). Skip 性能测试/安全测试 cases or mark them as SKIP.
-3. **Prepare test environment**:
+1. **确认执行范围**: 向用户确认要执行的用例文件路径，以及是否全部执行还是仅执行指定模块/用例。
+2. **Parse test cases**: Read the `.xlsx` test case table (user-provided path), extract each case's 用例编号 (case ID), 一级/二级/三级模块, 前置条件, 测试方法和步骤, 预期结果.
+3. **Select executable cases**: Filter cases whose 分类 is 功能测试 or 接口测试 (UI-executable). Skip 性能测试/安全测试 cases or mark them as SKIP.
+4. **Prepare test environment**:
    - Use `browser_navigate` to open the SUT URL.
    - If login is required, execute the login flow (see 5.3).
-4. **Execute each case step-by-step**:
+5. **Execute each case step-by-step**:
    - Translate each step of 测试方法和步骤 into playwright actions (`browser_click`, `browser_type`, `browser_select_option`, `browser_navigate`, etc.).
    - After each step, verify the corresponding 预期结果 using `browser_snapshot` (check element presence, text, page state).
    - If a step involves a CAPTCHA, use `captcha.recognize_captcha` / `captcha.recognize_captcha_base64` to auto-fill it.
-5. **Collect evidence**: After each case (or key step), call `browser_take_screenshot` and save to `evidence/TC-XXX-001.png`.
-6. **Record results**: For each case, determine PASS / FAIL / SKIP:
+6. **Collect evidence**: After each case (or key step), call `browser_take_screenshot` and save to `evidence/TC-XXX-001.png`.
+7. **Record results**: For each case, determine PASS / FAIL / SKIP / **AMBIGUOUS**:
    - **PASS**: All steps executed successfully and all expected results verified.
    - **FAIL**: Any step failed or an expected result was not met. Record the failure reason.
    - **SKIP**: Case not executable (e.g., 性能测试/安全测试, or missing prerequisites).
-7. **Backfill results**: Update the `.xlsx` test case table:
-   - Fill 测试结果 (V column, Round 1) with OK / NG / SKIP.
+   - **AMBIGUOUS (模糊/不确定)**: 执行过程中遇到以下情况时，**标记为模糊而非猜测执行**：
+     - 步骤描述不明确，无法确定要操作哪个元素（如「点击相关按钮」但页面上有多个候选）。
+     - 预期结果表述模糊，无法客观判断是否通过（如「页面正常显示」无具体断言点）。
+     - 步骤缺失或前后矛盾（如前置条件未满足、步骤顺序不合理）。
+     - 页面出现多个相似元素/弹窗，无法确定目标。
+     - 需要人工判断的业务规则或外部依赖。
+     - 标记方式：测试结果列填 `AMBIGUOUS`（或备注中标注「模糊/需人工确认」），并在备注中写明**模糊点**和**需要用户确认的问题**。
+8. **Backfill results**: Update the `.xlsx` test case table:
+   - Fill 测试结果 (V column, Round 1) with OK / NG / SKIP / AMBIGUOUS.
    - Fill 测试版本 (W column) with the test version.
    - Fill 测试人 (X column) with the executor name.
-   - Fill 备注 (Y column) with failure reasons or evidence file paths.
+   - Fill 备注 (Y column) with failure reasons, ambiguity descriptions, or evidence file paths.
    - Update the header statistics zone (用例条数 / 纳入测试 / 执行率 / 通过率).
-8. **Generate execution report**: Create a test execution report summarizing:
-   - Total cases, executed, passed, failed, skipped.
+9. **Generate execution report**: Create a test execution report summarizing:
+   - Total cases, executed, passed, failed, skipped, ambiguous.
    - Pass rate and execution rate.
    - Per-module results.
    - Failure details with evidence screenshots.
+   - **Ambiguous cases list** with the specific questions that need user confirmation.
 
 ### 5.3 Login Flow with CAPTCHA (带验证码登录)
 
@@ -394,6 +406,7 @@ If login fails due to wrong CAPTCHA recognition, refresh the CAPTCHA and retry (
 - **OK (PASS)**: All steps and expected results verified. Fill 测试结果=OK.
 - **NG (FAIL)**: Any step failed. Fill 测试结果=NG and record the failure step + reason in 备注.
 - **SKIP**: Not executable. Fill 测试结果=SKIP and record the reason in 备注.
+- **AMBIGUOUS (模糊/不确定)**: 步骤或预期结果不明确、无法客观判断时，**不猜测执行**，标记为 AMBIGUOUS，并在备注中写明模糊点与待确认问题。
 - Evidence screenshots are saved under `evidence/` and referenced in 备注.
 
-> **Important**: Automated execution is best-effort. If a case cannot be reliably automated (e.g., complex business logic, external dependencies), mark it as SKIP and note it for manual testing.
+> **Important**: Automated execution is best-effort. If a case cannot be reliably automated (e.g., complex business logic, external dependencies), mark it as SKIP and note it for manual testing. If a case is ambiguous (unclear steps/expected results), mark it as **AMBIGUOUS** and list the questions for user confirmation — do NOT guess.
