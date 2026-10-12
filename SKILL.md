@@ -120,10 +120,6 @@ When the user asks for "思维导图" or "test mind map", generate BOTH:
 - Each node as an `<mxCell>` with `vertex="1"`, connected via edges (`edge="1"`).
 - Use distinct colors for each [Type] label: e.g., 正向=green, 边界=orange, 异常=red, 权限=blue, 安全=purple, 性能=cyan.
 
-##### 3. Markdown (.md) — OPTIONAL, as text preview only
-- Provide a `.md` file with Mermaid mindmap source or Markdown tree for quick text preview.
-- This is NOT the primary deliverable; it's a convenience reference.
-
 ##### Image and Editability Requirements
 
 - **Core principle: The mind map MUST be deliverable in an editable format that supports image-level editing.
