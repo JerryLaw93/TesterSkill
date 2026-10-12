@@ -422,12 +422,23 @@ allure open allure-report
 # 用浏览器打开 allure-report/index.html 即可
 ```
 
-#### 输出物
+#### 输出物（输出位置）
+
+Allure 相关文件统一输出到**用例文件（.xlsx）所在目录**下：
+
+```
+<用例文件所在目录>/
+├── 用例.xlsx                    # 原始用例文件（含回填的执行结果）
+├── evidence/                    # 执行截图证据
+├── allure-results/              # 原始结果 JSON（可再次生成报告）
+└── allure-report/               # 静态 HTML 报告（index.html 为入口）
+```
 
 - `allure-results/` — 原始结果 JSON（可再次生成报告）
 - `allure-report/` — 静态 HTML 报告（`index.html` 为入口，可直接打开/部署）
 
 > **注意**：Allure 报告为**静态页面**，`allure-report/index.html` 可直接用浏览器打开，无需启动服务；也可将 `allure-report` 目录部署到任意静态站点（如 Nginx、GitHub Pages）。
+> 若用户指定了其他输出目录，则按用户指定位置输出。
 
 ### 5.3 Login Flow with CAPTCHA (带验证码登录)
 

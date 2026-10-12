@@ -171,9 +171,19 @@ pip install fastmcp ddddocr
 
 **状态映射**：PASS→`passed`，FAIL→`failed`，SKIP→`skipped`，AMBIGUOUS→`broken`
 
-**输出物**：
+**输出物（输出位置）**：Allure 相关文件统一输出到**用例文件（.xlsx）所在目录**下：
+
+```
+<用例文件所在目录>/
+├── 用例.xlsx                    # 原始用例文件（含回填的执行结果）
+├── evidence/                    # 执行截图证据
+├── allure-results/              # 原始结果 JSON
+└── allure-report/               # 静态 HTML 报告（index.html 为入口）
+```
+
 - `allure-results/` — 原始结果 JSON
 - `allure-report/` — 静态 HTML 报告（`index.html` 为入口）
+- 若用户指定了其他输出目录，则按用户指定位置输出。
 
 ### 3. 执行结果说明
 

@@ -271,13 +271,24 @@ allure generate allure-results -o allure-report --clean
 allure open allure-report
 ```
 
-### 8.4 输出物
+### 8.4 输出物（输出位置）
+
+Allure 相关文件统一输出到**用例文件（.xlsx）所在目录**下：
+
+```
+<用例文件所在目录>/
+├── 用例.xlsx                    # 原始用例文件（含回填的执行结果）
+├── evidence/                    # 执行截图证据
+├── allure-results/              # 原始结果 JSON（可再次生成报告）
+└── allure-report/               # 静态 HTML 报告（index.html 为入口）
+```
 
 - `allure-results/` — 原始结果 JSON（可再次生成报告）
 - `allure-report/` — 静态 HTML 报告（`index.html` 为入口）
 
 > **静态页面说明**：`allure-report/index.html` 可直接用浏览器打开，无需启动服务；
 > 也可将 `allure-report` 目录整体部署到任意静态站点（Nginx、GitHub Pages 等）供团队查看。
+> 若用户指定了其他输出目录，则按用户指定位置输出。
 
 ---
 
