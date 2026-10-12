@@ -47,7 +47,8 @@ software-tester/
    }
    ```
 
-   - `playwright` 需要 Node.js 环境（`npx` 可用），可选通过 `PLAYWRIGHT_BROWSER_PATH` 指定本机浏览器。
+   - `playwright` 需要 Node.js 环境（`npx` 可用）。
+   - `PLAYWRIGHT_BROWSER_PATH` 是 Playwright 官方标准环境变量，用于指定本机浏览器可执行文件路径（如 Chrome），避免下载浏览器内核；仅在 `mcp.json` 的 `env` 字段中配置即可，无需设置系统环境变量。
    - `captcha` 需要 Python 环境，并安装依赖：`pip install fastmcp ddddocr`。
    - 保存后需在 IDE 中刷新/重连 MCP 服务器，确认状态为「已连接」。
    - 详细配置说明见 `references/mcp_integration.md`。

@@ -57,6 +57,38 @@ MCP 服务器通过 `mcp.json` 配置文件注册，常见位置：
 | `args` | 传给命令的参数（如 npm 包名、脚本路径） |
 | `env` | 可选，服务器运行所需的环境变量 |
 
+### 关于 PLAYWRIGHT_BROWSER_PATH 的说明
+
+`PLAYWRIGHT_BROWSER_PATH` 是 **Playwright 官方标准环境变量**（不是 @playwright/mcp 自定义的），用于指定浏览器可执行文件的路径。
+
+**它是什么：**
+- 它是 Playwright 框架本身支持的环境变量，用于覆盖默认的浏览器查找逻辑。
+- 在 `mcp.json` 的 `env` 字段中配置后，仅对该 MCP 服务器进程生效，**不需要**在 Windows 系统环境变量中单独设置。
+
+**为什么需要它：**
+- 默认情况下，Playwright 会下载并使用自己内置的 Chromium 浏览器内核（体积较大，且国内网络下载可能较慢）。
+- 设置该变量指向本机已安装的浏览器（如 Chrome），可以**复用现有浏览器，避免下载浏览器内核**。
+
+**如何操作（Windows）：**
+
+1. **找到本机浏览器可执行文件路径**，常见位置：
+   - Chrome：`C:\Program Files\Google\Chrome\Application\chrome.exe`
+   - Edge：`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+   - 也可在浏览器地址栏输入 `chrome://version`（Chrome）或 `edge://version`（Edge）查看「可执行文件路径」。
+2. **在 `mcp.json` 的 `env` 字段中填入该路径**（注意 JSON 中反斜杠需写为 `\\`）：
+   ```json
+   "env": {
+     "PLAYWRIGHT_BROWSER_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+   }
+   ```
+3. **保存并重连**：保存 `mcp.json` 后，在 IDE 中刷新/重连 MCP 服务器使配置生效。
+
+**不设置会怎样：**
+- 不设置该变量也可以正常使用，Playwright 会自动下载内置浏览器内核（首次使用需等待下载）。
+- 如果本机已有 Chrome/Edge，建议设置以加快启动速度并复用浏览器配置。
+
+> **注意**：如果不想用环境变量，也可以改用 `--executable-path <path>` 命令行参数（`@playwright/mcp` 支持），效果相同。
+
 ### 配置步骤
 
 1. **playwright（浏览器自动化）**：
