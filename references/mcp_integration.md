@@ -14,6 +14,66 @@ Both servers are user-configured and must be enabled in the IDE before the skill
 
 ---
 
+## MCP Configuration (MCP 配置方式)
+
+### 配置文件位置
+
+MCP 服务器通过 `mcp.json` 配置文件注册，常见位置：
+
+- **IDE 全局配置**：`C:\Users\<用户名>\AppData\Roaming\Lingma\SharedClientCache\mcp.json`
+- 也可在 IDE 的 MCP 设置界面中可视化配置（添加服务器 → 填写命令与参数）。
+
+### 配置示例
+
+以下是本 skill 依赖的两个 MCP 服务器的完整配置：
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@0.0.31"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSER_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+      }
+    },
+    "captcha": {
+      "command": "python",
+      "args": [
+        "D:/study/MCP/catpcha_mcp.py"
+      ]
+    }
+  }
+}
+```
+
+### 字段说明
+
+| 字段 | 说明 |
+|------|------|
+| `command` | 启动 MCP 服务器的可执行命令（`npx` / `python` / `node` 等） |
+| `args` | 传给命令的参数（如 npm 包名、脚本路径） |
+| `env` | 可选，服务器运行所需的环境变量 |
+
+### 配置步骤
+
+1. **playwright（浏览器自动化）**：
+   - 需要 Node.js 环境（`npx` 可用）。
+   - 首次使用执行 `npx @playwright/mcp@0.0.31` 会自动下载依赖。
+   - 可选：通过 `env.PLAYWRIGHT_BROWSER_PATH` 指定本机浏览器路径（如 Chrome），避免下载浏览器内核。
+2. **captcha（验证码识别）**：
+   - 需要 Python 环境，并安装依赖：`pip install fastmcp ddddocr`。
+   - `args` 指向验证码识别脚本路径（如 `D:/study/MCP/catpcha_mcp.py`）。
+3. **启用验证**：
+   - 保存 `mcp.json` 后，在 IDE 中刷新/重连 MCP 服务器。
+   - 确认两个服务器状态为「已连接」，工具列表中出现 `recognize_captcha`、`browser_navigate` 等工具。
+
+> **注意**：不同机器上路径可能不同，请根据实际环境修改 `args` 和 `env` 中的路径。
+
+---
+
 ## 1. captcha — 验证码识别
 
 ### Tools

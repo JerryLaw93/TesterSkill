@@ -26,6 +26,32 @@ software-tester/
 1. **启用 MCP 服务**（在 IDE 中配置并启用）：
    - `playwright` — 浏览器自动化（24 个工具）
    - `captcha` — 验证码识别（2 个工具）
+
+   MCP 服务器通过 `mcp.json` 配置文件注册（IDE 全局配置位于 `C:\Users\<用户名>\AppData\Roaming\Lingma\SharedClientCache\mcp.json`），配置示例：
+
+   ```json
+   {
+     "mcpServers": {
+       "playwright": {
+         "command": "npx",
+         "args": ["@playwright/mcp@0.0.31"],
+         "env": {
+           "PLAYWRIGHT_BROWSER_PATH": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+         }
+       },
+       "captcha": {
+         "command": "python",
+         "args": ["D:/study/MCP/catpcha_mcp.py"]
+       }
+     }
+   }
+   ```
+
+   - `playwright` 需要 Node.js 环境（`npx` 可用），可选通过 `PLAYWRIGHT_BROWSER_PATH` 指定本机浏览器。
+   - `captcha` 需要 Python 环境，并安装依赖：`pip install fastmcp ddddocr`。
+   - 保存后需在 IDE 中刷新/重连 MCP 服务器，确认状态为「已连接」。
+   - 详细配置说明见 `references/mcp_integration.md`。
+
 2. **Python 环境**（生成 .xlsx 需要）：
    ```bash
    pip install openpyxl
