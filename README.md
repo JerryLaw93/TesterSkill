@@ -7,6 +7,7 @@
 - **测试点思维导图**：生成 `.xmind` + `.drawio` 双格式可编辑思维导图，覆盖正向 / 边界 / 异常 / 权限 / 性能 / 安全等测试类型。
 - **标准化测试用例表**：生成符合「测试管理平台导入模版」的 34 列 `.xlsx` 用例表，可直接导入测试管理平台。
 - **自动执行用例**：集成 `playwright`（浏览器自动化）与 `captcha`（验证码识别）MCP 服务，可自动执行 UI 用例并回填结果。
+- **Allure 静态报告**：执行结果可生成 Allure 静态 HTML 报告，便于分享与归档。
 - **模糊用例标记**：执行过程中遇到步骤/预期结果不明确的用例，标记为 `AMBIGUOUS` 并列出待确认问题，不猜测执行。
 
 ## 目录结构
@@ -151,6 +152,28 @@ pip install fastmcp ddddocr
 5. 截图留证（保存至 `evidence/` 目录）
 6. 结果回填到用例表（V~Y 列）
 7. 生成执行报告
+8. （可选）生成 **Allure 静态 HTML 报告**
+
+### 2.1 生成 Allure 报告（可选）
+
+执行完成后，可要求将结果生成为 **Allure 静态 HTML 报告**：
+
+```
+执行用例，并生成 Allure 报告
+```
+
+**前置条件**：安装 Allure 命令行工具（`scoop install allure` / `choco install allure` / `brew install allure`，验证：`allure --version`）。
+
+**生成流程**：
+1. 执行时每个用例的结果写入 `allure-results/` 目录（JSON 格式，含步骤、状态、截图附件）
+2. 执行 `allure generate allure-results -o allure-report --clean` 生成静态 HTML
+3. 打开 `allure-report/index.html` 即可查看（纯静态页面，无需启动服务，也可部署到任意静态站点）
+
+**状态映射**：PASS→`passed`，FAIL→`failed`，SKIP→`skipped`，AMBIGUOUS→`broken`
+
+**输出物**：
+- `allure-results/` — 原始结果 JSON
+- `allure-report/` — 静态 HTML 报告（`index.html` 为入口）
 
 ### 3. 执行结果说明
 

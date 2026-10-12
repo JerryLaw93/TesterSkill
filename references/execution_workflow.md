@@ -214,6 +214,73 @@ Create a summary report (`.md` or in the 统计 sheet):
 
 ---
 
+## Phase 8: Generate Allure Report (Allure 静态报告)
+
+> 可选步骤，用户要求生成 Allure 报告时执行。将执行结果转换为静态 HTML 页面。
+
+### 前置条件
+
+- 安装 Allure 命令行工具：
+  - **Windows**：`scoop install allure` 或 `choco install allure`，或官网下载 zip 解压并配置 PATH。
+  - **macOS**：`brew install allure`。
+  - 验证：`allure --version`。
+
+### 8.1 写入 Allure 结果文件
+
+每个用例在 `allure-results/` 目录下生成一个 `<uuid>-result.json` 文件：
+
+```json
+{
+  "name": "TC-LOG-001 验证登录功能",
+  "status": "passed",
+  "stage": "finished",
+  "description": "验证用户使用正确账号密码可成功登录",
+  "start": 1700000000000,
+  "stop": 1700000060000,
+  "labels": [
+    {"name": "suite", "value": "登录模块"},
+    {"name": "testCaseId", "value": "TC-LOG-001"},
+    {"name": "severity", "value": "critical"}
+  ],
+  "steps": [
+    {"name": "步骤1：打开登录页", "status": "passed"},
+    {"name": "步骤2：输入账号密码", "status": "passed"}
+  ],
+  "attachments": [
+    {"name": "evidence/TC-LOG-001_01.png", "type": "image/png"}
+  ]
+}
+```
+
+### 8.2 状态映射
+
+| 执行结果 | Allure status |
+|----------|---------------|
+| PASS | `passed` |
+| FAIL | `failed` |
+| SKIP | `skipped` |
+| AMBIGUOUS | `broken` |
+
+### 8.3 生成静态报告
+
+```bash
+# 生成报告（allure-results 为执行时写入的结果目录）
+allure generate allure-results -o allure-report --clean
+
+# 本地预览（可选）
+allure open allure-report
+```
+
+### 8.4 输出物
+
+- `allure-results/` — 原始结果 JSON（可再次生成报告）
+- `allure-report/` — 静态 HTML 报告（`index.html` 为入口）
+
+> **静态页面说明**：`allure-report/index.html` 可直接用浏览器打开，无需启动服务；
+> 也可将 `allure-report` 目录整体部署到任意静态站点（Nginx、GitHub Pages 等）供团队查看。
+
+---
+
 ## Execution Rules
 
 1. **默认不执行**: 生成用例后不自动执行，只有用户明确要求执行时才进入本流程。

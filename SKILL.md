@@ -363,6 +363,71 @@ After the test case table (`.xlsx`) is generated, the skill **can** automaticall
    - Per-module results.
    - Failure details with evidence screenshots.
    - **Ambiguous cases list** with the specific questions that need user confirmation.
+10. **Generate Allure report (Allure 静态报告)**: 将执行结果生成为 **Allure 静态 HTML 报告**（可选，用户要求时执行）：
+    - 为每个用例生成 Allure 结果文件（`allure-results/` 目录下的 JSON 文件），包含：用例编号、模块、描述、步骤、预期结果、执行状态（passed/failed/skipped）、失败原因、截图附件。
+    - 执行 `allure generate allure-results -o allure-report --clean` 生成静态 HTML 报告（`allure-report/` 目录）。
+    - 报告为纯静态页面，可直接用浏览器打开 `allure-report/index.html` 查看，也可部署到任意静态服务器。
+    - 前置条件：安装 Allure 命令行工具（`allure --version` 验证）。
+
+### 5.6 Allure Report Generation (Allure 报告生成)
+
+Allure 报告可将执行结果转换为美观的静态 HTML 页面，便于分享与归档。
+
+#### 前置条件
+
+- 安装 Allure 命令行工具：
+  - **Windows**：`scoop install allure` 或 `choco install allure`，或从 Allure 官网下载 zip 解压并配置 PATH。
+  - **macOS**：`brew install allure`。
+  - 验证：`allure --version`。
+
+#### 结果文件格式（allure-results）
+
+每个用例生成一个 `<uuid>-result.json` 文件，核心字段：
+
+```json
+{
+  "name": "TC-LOG-001 验证登录功能",
+  "status": "passed",
+  "stage": "finished",
+  "description": "验证用户使用正确账号密码可成功登录",
+  "start": 1700000000000,
+  "stop": 1700000060000,
+  "labels": [
+    {"name": "suite", "value": "登录模块"},
+    {"name": "testCaseId", "value": "TC-LOG-001"},
+    {"name": "severity", "value": "critical"}
+  ],
+  "steps": [
+    {"name": "步骤1：打开登录页", "status": "passed"},
+    {"name": "步骤2：输入账号密码", "status": "passed"}
+  ],
+  "attachments": [
+    {"name": "evidence/TC-LOG-001_01.png", "type": "image/png"}
+  ]
+}
+```
+
+状态映射：PASS→`passed`，FAIL→`failed`，SKIP→`skipped`，AMBIGUOUS→`broken`。
+
+#### 生成命令
+
+```bash
+# 1. 生成报告（allure-results 为执行时写入的结果目录）
+allure generate allure-results -o allure-report --clean
+
+# 2. 本地预览（可选，会启动本地服务）
+allure open allure-report
+
+# 3. 直接打开静态页面（无需服务）
+# 用浏览器打开 allure-report/index.html 即可
+```
+
+#### 输出物
+
+- `allure-results/` — 原始结果 JSON（可再次生成报告）
+- `allure-report/` — 静态 HTML 报告（`index.html` 为入口，可直接打开/部署）
+
+> **注意**：Allure 报告为**静态页面**，`allure-report/index.html` 可直接用浏览器打开，无需启动服务；也可将 `allure-report` 目录部署到任意静态站点（如 Nginx、GitHub Pages）。
 
 ### 5.3 Login Flow with CAPTCHA (带验证码登录)
 
