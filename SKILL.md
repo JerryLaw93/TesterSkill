@@ -264,4 +264,55 @@ Before delivering outputs, verify:
 3. Test point [Type] labels are complete (at least 4 types: 正向/边界/异常/权限 etc.).
 4. Each case satisfies the "Preconditions → Steps → Expected Results" complete chain.
 5. Module attribution is clear; case IDs are unique and follow naming conventions.
-6. Both positive flows and
+6. Both positive flows and exception/boundary cases are covered for each feature point.
+7. MCP tools (captcha / playwright) are used when applicable: captcha for login/verification flows, playwright for UI automation verification.
+
+## MCP Integration (MCP 集成)
+
+This skill integrates with the following MCP servers to enhance testing capabilities:
+
+### 1. captcha — 验证码识别
+
+- **Server**: `captcha`
+- **Purpose**: Automatically recognize CAPTCHA images during test execution, especially for login flows and form submissions that require verification codes.
+- **Tools**:
+  - `recognize_captcha(image_path)` — Recognize CAPTCHA from a local image file path.
+  - `recognize_captcha_base64(image_bytes)` — Recognize CAPTCHA from base64-encoded image bytes.
+- **Usage scenarios**:
+  - Login page with CAPTCHA: capture the CAPTCHA image (via screenshot or downloaded file), call `recognize_captcha`, then fill the recognized code into the input field.
+  - Form submission with image verification code.
+  - Automated test scripts that need to bypass manual CAPTCHA entry.
+- **Note**: If recognition fails, retry with a fresh CAPTCHA image; some CAPTCHAs may require multiple attempts.
+
+### 2. playwright — 浏览器自动化
+
+- **Server**: `playwright`
+- **Purpose**: Drive a real browser to execute UI test steps, verify page behavior, capture screenshots, and inspect network requests. Essential for UI automation testing and verifying test points that require actual browser interaction.
+- **Key tools**:
+  - `browser_navigate` — Navigate to a URL.
+  - `browser_click` / `browser_type` / `browser_select_option` — Interact with page elements.
+  - `browser_snapshot` — Get the accessibility snapshot of the current page (use this for actions, not screenshots).
+  - `browser_take_screenshot` — Capture a screenshot of the current page (for visual evidence, not for actions).
+  - `browser_network_requests` — Inspect network requests/responses (useful for API/interface verification).
+  - `browser_console_messages` — Check console errors (useful for front-end error detection).
+  - `browser_handle_dialog` — Handle alert/confirm/prompt dialogs.
+  - `browser_file_upload` — Upload files in web forms.
+  - `browser_wait_for` — Wait for page conditions.
+  - `browser_tab_new` / `browser_tab_select` / `browser_tab_close` — Multi-tab management.
+- **Usage scenarios**:
+  - Execute UI test steps from test cases in a real browser.
+  - Verify positive/negative flows interactively.
+  - Capture screenshots as test evidence.
+  - Inspect network requests to verify API calls made by the page.
+  - Detect console errors and page load failures.
+  - Handle CAPTCHA by combining with the `captcha` MCP server.
+
+### MCP Usage Workflow in Testing
+
+1. **Login flow**: Use `playwright` to navigate to the login page → capture the CAPTCHA image → use `captcha.recognize_captcha` to get the code → fill it in → submit.
+2. **UI test execution**: Use `playwright` to execute each step of the test case, verifying expected results via `browser_snapshot`.
+3. **Evidence collection**: Use `browser_take_screenshot` to capture screenshots for each test step.
+4. **Interface verification**: Use `browser_network_requests` to verify request/response data against expected results.
+5. **Error detection**: Use `browser_console_messages` to check for JS errors.
+
+> **Note**: MCP servers must be configured and enabled in the IDE before use. See `references/mcp_integration.md` for detailed tool references and examples.
