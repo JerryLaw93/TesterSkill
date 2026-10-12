@@ -139,3 +139,36 @@ Both servers are user-configured and must be enabled in the IDE before the skill
 - MCP servers must be configured and enabled in the IDE environment before use.
 - If a tool is unavailable, fall back to manual steps and note it in the test report.
 - Screenshots should be saved with meaningful names, e.g., `evidence/TC-LOG-001_step3.png`.
+
+---
+
+## Automated Test Execution (自动执行用例)
+
+After the test case table is generated, the skill can automatically execute the cases using
+`playwright` + `captcha`. See `execution_workflow.md` for the full workflow.
+
+### Execution Checklist
+
+1. Confirm the SUT URL and login credentials with the user.
+2. Ensure `playwright` and `captcha` MCP servers are enabled.
+3. Read the `.xlsx` test case table and extract executable cases.
+4. Execute each case with playwright actions; use captcha for verification codes.
+5. Save screenshots as evidence under `evidence/`.
+6. Backfill results (OK/NG/SKIP) into the `.xlsx` table (V~Y columns).
+7. Generate an execution report.
+
+### Result Mapping
+
+| Execution result | 测试结果 (V column) | Meaning |
+|------------------|--------------------|---------|
+| PASS | OK | All steps and expected results verified |
+| FAIL | NG | A step failed or an expected result was not met |
+| SKIP | SKIP | Not executable (性能/安全测试, missing prerequisites) |
+
+### Best Practices
+
+- Always take a screenshot before and after each critical step.
+- If CAPTCHA recognition fails, refresh and retry (max 3 attempts).
+- Verify expected results with `browser_snapshot`, not screenshots.
+- Use `browser_network_requests` to verify API-level expected results.
+- Mark complex/unreliable cases as SKIP for manual testing.

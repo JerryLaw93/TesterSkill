@@ -316,3 +316,84 @@ This skill integrates with the following MCP servers to enhance testing capabili
 5. **Error detection**: Use `browser_console_messages` to check for JS errors.
 
 > **Note**: MCP servers must be configured and enabled in the IDE before use. See `references/mcp_integration.md` for detailed tool references and examples.
+
+## Step 5: Automated Test Execution (自动执行用例)
+
+After the test case table (`.xlsx`) is generated, the skill can **automatically execute the test cases** using the configured MCP servers (`playwright` for browser automation, `captcha` for verification code recognition). This turns the test case table into an executable test suite.
+
+### 5.1 Execution Preconditions
+
+- The system under test (SUT) URL must be known. Ask the user if not provided.
+- Login credentials must be provided by the user (or use a test account).
+- The `playwright` and `captcha` MCP servers must be enabled.
+- The generated `.xlsx` test case table must exist.
+
+### 5.2 Execution Flow
+
+1. **Parse test cases**: Read the `.xlsx` test case table, extract each case's 用例编号 (case ID), 一级/二级/三级模块, 前置条件, 测试方法和步骤, 预期结果.
+2. **Select executable cases**: Filter cases whose 分类 is 功能测试 or 接口测试 (UI-executable). Skip 性能测试/安全测试 cases or mark them as SKIP.
+3. **Prepare test environment**:
+   - Use `browser_navigate` to open the SUT URL.
+   - If login is required, execute the login flow (see 5.3).
+4. **Execute each case step-by-step**:
+   - Translate each step of 测试方法和步骤 into playwright actions (`browser_click`, `browser_type`, `browser_select_option`, `browser_navigate`, etc.).
+   - After each step, verify the corresponding 预期结果 using `browser_snapshot` (check element presence, text, page state).
+   - If a step involves a CAPTCHA, use `captcha.recognize_captcha` / `captcha.recognize_captcha_base64` to auto-fill it.
+5. **Collect evidence**: After each case (or key step), call `browser_take_screenshot` and save to `evidence/TC-XXX-001.png`.
+6. **Record results**: For each case, determine PASS / FAIL / SKIP:
+   - **PASS**: All steps executed successfully and all expected results verified.
+   - **FAIL**: Any step failed or an expected result was not met. Record the failure reason.
+   - **SKIP**: Case not executable (e.g., 性能测试/安全测试, or missing prerequisites).
+7. **Backfill results**: Update the `.xlsx` test case table:
+   - Fill 测试结果 (V column, Round 1) with OK / NG / SKIP.
+   - Fill 测试版本 (W column) with the test version.
+   - Fill 测试人 (X column) with the executor name.
+   - Fill 备注 (Y column) with failure reasons or evidence file paths.
+   - Update the header statistics zone (用例条数 / 纳入测试 / 执行率 / 通过率).
+8. **Generate execution report**: Create a test execution report summarizing:
+   - Total cases, executed, passed, failed, skipped.
+   - Pass rate and execution rate.
+   - Per-module results.
+   - Failure details with evidence screenshots.
+
+### 5.3 Login Flow with CAPTCHA (带验证码登录)
+
+```
+1. browser_navigate(url=SUT_URL)          # open login page
+2. browser_snapshot()                     # locate username/password/captcha fields
+3. browser_type(...)                      # enter username
+4. browser_type(...)                      # enter password
+5. browser_take_screenshot(...)           # capture the captcha image
+6. recognize_captcha(image_path=...)      # OCR the captcha code
+7. browser_type(...)                      # enter the recognized code
+8. browser_click(...)                     # click login button
+9. browser_snapshot()                     # verify login success
+10. browser_network_requests()            # verify login API response
+11. browser_take_screenshot(...)          # save login success evidence
+```
+
+If login fails due to wrong CAPTCHA recognition, refresh the CAPTCHA and retry (max 3 attempts).
+
+### 5.4 Step-to-Action Mapping Rules
+
+| 测试方法和步骤 (natural language) | Playwright action |
+|----------------------------------|-------------------|
+| 点击「XX」按钮/链接/菜单 | `browser_click` (locate by text/role) |
+| 输入「XX」到「YY」输入框 | `browser_type` |
+| 选择「XX」下拉选项 | `browser_select_option` |
+| 打开/跳转到「XX」页面 | `browser_navigate` |
+| 上传「XX」文件 | `browser_file_upload` |
+| 等待页面加载/出现「XX」 | `browser_wait_for` |
+| 验证「XX」显示/存在 | `browser_snapshot` (assert element/text) |
+| 验证接口请求/响应 | `browser_network_requests` |
+| 处理弹窗/提示 | `browser_handle_dialog` |
+| 验证码识别 | `captcha.recognize_captcha` / `recognize_captcha_base64` |
+
+### 5.5 Result Recording Rules
+
+- **OK (PASS)**: All steps and expected results verified. Fill 测试结果=OK.
+- **NG (FAIL)**: Any step failed. Fill 测试结果=NG and record the failure step + reason in 备注.
+- **SKIP**: Not executable. Fill 测试结果=SKIP and record the reason in 备注.
+- Evidence screenshots are saved under `evidence/` and referenced in 备注.
+
+> **Important**: Automated execution is best-effort. If a case cannot be reliably automated (e.g., complex business logic, external dependencies), mark it as SKIP and note it for manual testing.
