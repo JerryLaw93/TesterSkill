@@ -1,0 +1,1120 @@
+{
+  "summary": {
+    "total": 60,
+    "passed": 50,
+    "failed": 0,
+    "untrusted": 10
+  },
+  "results": [
+    {
+      "cid": "TC-LOG-015",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-015"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-015"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-015"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-015"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-002",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-002-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-002-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-002-s1"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-002-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-003",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-003-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-003-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-003-s1"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-003-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-004",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-004-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-004-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-004-s1"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-004-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-005",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-005"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-005"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-006",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-006"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-006"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-007",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-007"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-007"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-010",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-010"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-010"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-008",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-008-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-008-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-008-s1"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-008-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-001",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-001-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-001-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-001-s1"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-001-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-011",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-011"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-011"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-011"
+        }
+      ]
+    },
+    {
+      "cid": "TC-HOME-001",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-HOME-001"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-HOME-001"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-HOME-001"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-HOME-001"
+        }
+      ]
+    },
+    {
+      "cid": "TC-HOME-002",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-HOME-002"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-HOME-002"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-HOME-002"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-HOME-002"
+        }
+      ]
+    },
+    {
+      "cid": "TC-SES-001",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-SES-001"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-SES-001"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-SES-001"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-009",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-009-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-009-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-009-s3"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-012",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-012-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-012-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-012-s1"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-012-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-013",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-013-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-013-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-013-s1"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-013-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-LOG-014",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-LOG-014-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-LOG-014-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-LOG-014-s1"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-LOG-014-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-001",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-001"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-001"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-001"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-002",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-002"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-002"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-004",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-004"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-004"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-005",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-005"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-005"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-006",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-006"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-006"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-007",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-007"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-007"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-008",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-008"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-008"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-009",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-USER-010",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-010"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-010"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-010"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-011",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-011-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-011-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-011-s2"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-USER-011-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-012",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-012-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-012-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-012-s2"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-013",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-013-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-013-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-013-s2"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-014",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-014-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-014-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-014-s3"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-015",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-015-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-015-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-015-s3"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-USER-015-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-016",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-016-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-016-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-016-s3"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-USER-016-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-017",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-017-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-017-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-017-s2"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-018",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-018-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-018-s1"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-018-s3"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-019",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-019"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-019"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-020",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-020-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-020-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-020-s3"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-021",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-021-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-021-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-021-s2"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-022",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-022-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-022-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-022-s3"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-USER-022-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-023",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-023-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-023-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-023-s2"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-024",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-USER-025",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-025"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-025"
+        }
+      ]
+    },
+    {
+      "cid": "TC-USER-026",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-USER-026-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-USER-026-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-USER-026-s2"
+        }
+      ]
+    },
+    {
+      "cid": "TC-SES-002",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-SES-005",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-SES-003",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-SES-004",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-SES-006",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-SES-006"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-SES-006"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-001",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-ROLE-001"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-ROLE-001"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-ROLE-001"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-002",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-ROLE-002-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-ROLE-002-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-ROLE-002-s2"
+        },
+        {
+          "idx": 4,
+          "status": "passed",
+          "shot": "TC-ROLE-002-s4"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-003",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-ROLE-003"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-ROLE-003"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-ROLE-003"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-010",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-ROLE-010"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-ROLE-010"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-ROLE-010"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-004",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-ROLE-004-s1-edit"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-ROLE-004-s2-after"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-ROLE-004-s2-after"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-005",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-ROLE-005-s1"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-ROLE-005-s2"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-ROLE-005-s2"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-006",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-ROLE-006"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-ROLE-006"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-008",
+      "status": "passed",
+      "steps": [
+        {
+          "idx": 1,
+          "status": "passed",
+          "shot": "TC-ROLE-008"
+        },
+        {
+          "idx": 2,
+          "status": "passed",
+          "shot": "TC-ROLE-008"
+        },
+        {
+          "idx": 3,
+          "status": "passed",
+          "shot": "TC-ROLE-008"
+        }
+      ]
+    },
+    {
+      "cid": "TC-ROLE-009",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-ROLE-007",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-HOME-003",
+      "status": "passed",
+      "steps": []
+    },
+    {
+      "cid": "TC-HOME-004",
+      "status": "passed",
+      "steps": []
+    }
+  ]
+}
