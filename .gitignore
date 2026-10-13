@@ -1,0 +1,14 @@
+# Local caches and runtime artifacts
+__pycache__/
+*.pyc
+.DS_Store
+.idea/
+.vscode/
+
+# Generated reports
+allure-report/
+allure-results/
+evidence/
+
+# Working xlsx (keep template only)
+testcases/
