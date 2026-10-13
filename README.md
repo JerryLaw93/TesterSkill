@@ -213,8 +213,3 @@ pip install fastmcp ddddocr
 | 版本 | 说明 |
 |------|------|
 | V1.0 | 集成 captcha / playwright MCP，支持自动执行用例；默认不执行、需提供用例文件路径、模糊用例标记 AMBIGUOUS |
-
-## 远程仓库
-
-- 仓库：`https://e.coding.csair.com/codingcorp/22851/TesterSkills.git`
-- 分支：`master`（稳定版）、`V1.0`（开发版）
